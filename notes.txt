@@ -1,0 +1,11 @@
+#Drag Race Memory Game
+
+The objective of this game is to find two queens of the same. You win by finding all the pairs.
+
+In order to play you need to:
+1.Click on one of the cards. The card will flip around and the picture of a Queen will appear
+2.Click on any other card. If the second card matches the first one, the two cards will stay showing the face of the Queen.
+If not, they will flip back to their initial state.
+
+#Tech process
+1. Start by fetching the JSON server api and mapping it. You need to use useEffect and async await
