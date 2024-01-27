@@ -3,13 +3,15 @@ import { useState} from 'react';
 import './App.css'
 
 const Card = (queen) => {
-  const [isHidden, setIsHidden] = useState(true);
-  const handleFlip = () => {
-    setIsHidden(!isHidden)
-    console.log(`${queen.id} is flipped`)
-  }
+const [isHidden, setIsHidden] = useState(true);
+
+const handleFlip = () => {
+  setIsHidden(!isHidden)
+  
+}
+  
   return (
-    <div onClick={handleFlip}>
+    <div>
       {
         isHidden ? 
           <div className='card__container-item' key={queen.id}>
@@ -22,7 +24,6 @@ const Card = (queen) => {
             <p>{queen.name}</p>
         </div>
       }
-    
   </div>  
   )    
 }
