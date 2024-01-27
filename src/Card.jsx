@@ -12,7 +12,7 @@ const Card = (queen) => {
     <div onClick={handleFlip}>
       {
         isHidden ? 
-          <div className='card__container-item' key={queen.id} onClick={handleFlip}>
+          <div className='card__container-item' key={queen.id}>
             <img src="" width={300} />
             <p>Guess the queen</p>
           </div>
