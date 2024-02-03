@@ -8,7 +8,7 @@ const App = () => {
   const [data, setData] = useState([])
   const [cards, setCards] = useState([])
   const [error, setError] = useState(false)
-  //const [isHidden, setIsHidden] = useState(true)
+  const [sortedCards, setSortedCards] = useState([])
   
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +16,8 @@ const App = () => {
         const response = await fetch('https://my-json-server.typicode.com/priscilla-wettlen/drag-race-server/queens');
         const queens = await response.json();
         setData(queens)
-        setCards(queens.map((card) => ({ ...card, isHidden: true })));
-
+        setCards(queens.map(queen => (queen)).slice(7));
+       
       } catch (e) {
         setError(true)
       }
@@ -25,34 +25,22 @@ const App = () => {
     fetchData()
   }, [])
   
-  const handleFlip = (id) => {
-    setCards((prevCards) =>
-      prevCards.map((card) => 
-        card.id === id ? { ...card, isHidden: !card.isHidden } : card
-      )) 
-    console.log(id)
+  const shuffleCards = () => {
+    const suffledArray = [...cards, ...cards]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.floor(Math.random() * 1000000) }))
+    
+    setSortedCards(suffledArray)
   }
+
+  console.log(sortedCards)
   
   return ( 
     <>
       <h1>Drag Race Memory Game</h1>
-      <div className='card__container'>
-        {cards.map((queen) => (
-          <div key={queen.id} onClick={() => handleFlip(queen.id)}>
-            {queen.isHidden ?
-              <div className='card__container-item' key={queen.id}>
-              <img src="" width={300} />
-            <p>Guess the queen</p>
-              </div>
-              :
-             <div className='card__container-item' key={queen.id}>
-            <img src={queen.url} width={300} />
-            <p>{queen.name}</p>
-        </div>
-          }
-              </div>
-
-        ))}
+      <button onClick={shuffleCards}>New game</button>
+      <div className='card-grid'>
+       
       </div>
     </>
    );
